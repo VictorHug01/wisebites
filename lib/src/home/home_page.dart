@@ -17,21 +17,21 @@ class _MyHomePageState extends State<MyHomePage> {
       width: double.infinity,
       child: Image.asset(
         'assets/s1.png',
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
       ),
     ),
     SizedBox(
       width: double.infinity,
       child: Image.asset(
         'assets/s2.png',
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
       ),
     ),
     SizedBox(
       width: double.infinity,
       child: Image.asset(
         'assets/s3.png',
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
       ),
     ),
   ];
@@ -40,46 +40,54 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       endDrawer: const DrawerComponent(),
       appBar: AppBar(
+        toolbarHeight: 80.0,
+        automaticallyImplyLeading: false,
+        leadingWidth: 150.0,
+        foregroundColor: Color(0XFFFF0000),
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
           child: Image.asset(
             'assets/logo.png',
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           ),
         ),
         actions: [
-          MediaQuery.of(context).size.width < 650
-              ? Builder(
-                builder: (context) {
-                  return IconButton(
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+            child: MediaQuery.of(context).size.width < 650
+                ? Builder(builder: (context) {
+                    return IconButton(
                       onPressed: () {
                         Scaffold.of(context).openEndDrawer();
                       },
                       icon: const Icon(Icons.menu),
                     );
-                }
-              )
-              : const Row(
-                  children: [
-                    ListSpace(textList: 'Home'),
-                    ListSpace(textList: 'Sobre nós'),
-                    ListSpace(textList: 'Como funciona'),
-                    ListSpace(textList: 'Custos'),
-                    ListSpace(textList: 'Escolas'),
-                  ],
-                ),
+                  })
+                : const Row(
+                    children: [
+                      ListSpace(textList: 'Home'),
+                      ListSpace(textList: 'Sobre nós'),
+                      ListSpace(textList: 'Como funciona'),
+                      ListSpace(textList: 'Custos'),
+                      ListSpace(textList: 'Escolas'),
+                    ],
+                  ),
+          ),
         ],
       ),
       body: ListView(
         children: [
+          SizedBox(
+            height: 15.0,
+          ),
           SizedBox(
             width: double.infinity,
             child: CarouselSlider(
               options: CarouselOptions(
                 autoPlayCurve: Curves.easeInOutSine,
                 viewportFraction: 1.0,
-                aspectRatio: 16 / 9,
-                height: 350,
+                height: 450,
                 autoPlay: true,
                 autoPlayInterval: const Duration(seconds: 3),
               ),
