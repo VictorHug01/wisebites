@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:zerowate/src/home/drawerComponent/drawer_component.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -12,85 +12,95 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Widget> imagens = [
+    SizedBox(
+      width: double.infinity,
+      child: Image.asset(
+        'assets/s1.png',
+        fit: BoxFit.cover,
+      ),
+    ),
+    SizedBox(
+      width: double.infinity,
+      child: Image.asset(
+        'assets/s2.png',
+        fit: BoxFit.cover,
+      ),
+    ),
+    SizedBox(
+      width: double.infinity,
+      child: Image.asset(
+        'assets/s3.png',
+        fit: BoxFit.cover,
+      ),
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      // ),
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          const SliverAppBar(
-            actions: [
-              Text('Home'),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-              Text('Home'),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-              Text('Home'),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-              Text('Home'),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-              Text('Home'),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-              Text('Home'),
-              Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
-            ],
-            floating: false,
-            pinned: false,
-            snap: false,
-            leading: FlutterLogo(
-              size: 40,
+      endDrawer: const DrawerComponent(),
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.asset(
+            'assets/logo.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+        actions: [
+          MediaQuery.of(context).size.width < 650
+              ? Builder(
+                builder: (context) {
+                  return IconButton(
+                      onPressed: () {
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      icon: const Icon(Icons.menu),
+                    );
+                }
+              )
+              : const Row(
+                  children: [
+                    ListSpace(textList: 'Home'),
+                    ListSpace(textList: 'Sobre nós'),
+                    ListSpace(textList: 'Como funciona'),
+                    ListSpace(textList: 'Custos'),
+                    ListSpace(textList: 'Escolas'),
+                  ],
+                ),
+        ],
+      ),
+      body: ListView(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: CarouselSlider(
+              options: CarouselOptions(
+                autoPlayCurve: Curves.easeInOutSine,
+                viewportFraction: 1.0,
+                aspectRatio: 16 / 9,
+                height: 350,
+                autoPlay: true,
+                autoPlayInterval: const Duration(seconds: 3),
+              ),
+              items: imagens.map((Image) => Image).toList(),
             ),
           ),
         ],
-        body: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                child: CarouselSlider.builder(
-                  itemCount: 15,
-                  itemBuilder: (context, index, realIndex) {
-                    return Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(17),
-                        child: Container(
-                          color: Colors.green,
-                          child: Center(
-                            child: Text(
-                              'Item${index++}',
-                              style: GoogleFonts.montserrat(
-                                color: Colors.green,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 45,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                  options: CarouselOptions(
-                    height: MediaQuery.of(context).size.height / 5,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 1,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    enlargeFactor: 0.3,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
       ),
+    );
+  }
+}
+
+class ListSpace extends StatelessWidget {
+  final String textList;
+  const ListSpace({super.key, required this.textList});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: Text(textList),
     );
   }
 }
