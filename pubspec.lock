@@ -126,6 +126,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_anchorlable:
+    dependency: "direct main"
+    description:
+      name: flutter_anchorlable
+      sha256: b8ea8f7a756c594742cb7aadd2f4d38354eb6c338bb713e59fe2932679e25304
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
@@ -299,6 +307,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.7.3"
+  resend:
+    dependency: "direct main"
+    description:
+      name: resend
+      sha256: "2e0532f29a057e8a8f643adb8fc3d882e836d316da07cba821d83da72889c1ab"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
