@@ -117,26 +117,19 @@ class _MyHomePageState extends State<MyHomePage> {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               childAspectRatio:
-                  MediaQuery.of(context).size.width >= 650 ? 16 / 7 : 32 / 9,
+                  MediaQuery.of(context).size.width >= 650 ? 16 / 15 : 32 / 9,
               children: [
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: Image.asset(
-                    'assets/logo.png',
-                    width: MediaQuery.of(context).size.width / 3.0,
-                  ),
-                ),
                 Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: MediaQuery.of(context).size.width < 650
                         ? CrossAxisAlignment.end
-                        : CrossAxisAlignment.start,
+                        : CrossAxisAlignment.center,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Porque WiseBites?',
+                          'Sobre nós',
                           softWrap: false,
                           style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.w400,
@@ -158,6 +151,15 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       )
                     ],
+                  ),
+                ),
+                Container(
+                  alignment: MediaQuery.of(context).size.width < 650
+                      ? Alignment.centerLeft
+                      : Alignment.center,
+                  child: Image.asset(
+                    'assets/frame1.png',
+                    width: 200.0,
                   ),
                 ),
               ],
