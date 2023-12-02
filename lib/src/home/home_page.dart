@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zerowate/src/home/drawerComponent/drawer_component.dart';
 import 'package:zerowate/src/home/formulario/formulario_component.dart';
+import 'package:zerowate/src/theme/theme_class.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -57,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
           SliverAppBar(
             toolbarHeight: 80.0,
             leadingWidth: 150.0,
-            foregroundColor: Color(0XFFFF0000),
+            foregroundColor: ColorThemeClass.colorPrimary,
             surfaceTintColor: Colors.transparent,
             leading: Padding(
               padding:
@@ -133,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.w400,
                             fontSize: MediaQuery.of(context).size.width / 20.0,
-                            color: Color(0XFFFF0000),
+                            color: ColorThemeClass.colorPrimary,
                           ),
                         ),
                       ),
@@ -148,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w400,
                               fontSize: MediaQuery.of(context).size.width / 50.0,
-                              color: Color(0XFFFF0000),
+                              color: ColorThemeClass.colorPrimary,
                             ),
                         ),
                       )

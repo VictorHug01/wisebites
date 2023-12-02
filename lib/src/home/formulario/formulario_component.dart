@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:zerowate/src/home/formulario/cadastro_mixin_validator.dart';
-import 'package:zerowate/src/home/home_page.dart';
 import 'package:zerowate/src/theme/theme_class.dart';
 
 class FormularioComponent extends StatefulWidget {
@@ -39,6 +40,15 @@ class _FormularioComponentState extends State<FormularioComponent>
       width: 2.0,
     ),
   );
+  final Email email = Email(
+    body: 'Email body',
+    subject: 'Email subject',
+    recipients: ['projectxz6969@gmail.com'],
+    cc: ['cc@example.com'],
+    bcc: ['bcc@example.com'],
+    isHTML: false,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -47,8 +57,8 @@ class _FormularioComponentState extends State<FormularioComponent>
       children: [
         Container(
           width: MediaQuery.of(context).size.width < 650
-          ?  MediaQuery.of(context).size.width / 1.5
-          : MediaQuery.of(context).size.width / 2,
+              ? MediaQuery.of(context).size.width / 1.5
+              : MediaQuery.of(context).size.width / 1.9,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Form(
@@ -63,6 +73,30 @@ class _FormularioComponentState extends State<FormularioComponent>
                     children: <Widget>[
                       const SizedBox(
                         height: 90,
+                      ),
+                      Text(
+                        'COMECE AGORA!',
+                        softWrap: true,
+                        style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w400,
+                          fontSize: MediaQuery.of(context).size.width / 20.0,
+                          color: ColorThemeClass.colorPrimary,
+                        ),
+                      ),
+                      Text(
+                        'PREENCHA ABAIXO PARA PARTICIPAR!',
+                        softWrap: false,
+                        textAlign: MediaQuery.of(context).size.width < 650
+                            ? TextAlign.center
+                            : TextAlign.left,
+                        style: GoogleFonts.montserrat(
+                          fontWeight: FontWeight.w400,
+                          fontSize: MediaQuery.of(context).size.width / 50.0,
+                          color: ColorThemeClass.colorPrimary,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 30,
                       ),
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 5),
@@ -131,19 +165,21 @@ class _FormularioComponentState extends State<FormularioComponent>
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(6), // <-- Radius
+                              borderRadius: BorderRadius.circular(6),
                             ),
                             padding: const EdgeInsets.all(15.0),
                             backgroundColor: ColorThemeClass.colorPrimary,
                           ),
                           onPressed: () {
                             if (_keyForm.currentState!.validate()) {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (_) => const MyHomePage(),
-                                ),
-                              );
+                              // Navigator.of(context).pushReplacement(
+                              //   MaterialPageRoute(
+                              //     builder: (_) => const MyHomePage(),
+                              //   ),
+                              // );
+                              FlutterEmailSender.send(email);
+
+                              //https://pub.dev/packages/flutter_email_sender/example
                             }
                           },
                           child: Text(
