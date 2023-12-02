@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zerowate/src/home/drawerComponent/drawer_component.dart';
+import 'package:zerowate/src/home/formulario/formulario_component.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -117,20 +118,18 @@ class _MyHomePageState extends State<MyHomePage> {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               childAspectRatio:
-                  MediaQuery.of(context).size.width >= 650 ? 16 / 15 : 32 / 9,
+                  MediaQuery.of(context).size.width >= 650 ? 16 / 15 : 14 / 9,
               children: [
                 Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: MediaQuery.of(context).size.width < 650
-                        ? CrossAxisAlignment.end
-                        : CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           'Sobre nós',
-                          softWrap: false,
+                          softWrap: true,
                           style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.w400,
                             fontSize: MediaQuery.of(context).size.width / 20.0,
@@ -141,13 +140,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'DESCULBRA OS BENEFÍCIOS DA NOSSA \n INICIATIVA.',
-                          softWrap: false,
-                          style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w400,
-                            fontSize: MediaQuery.of(context).size.width / 45.0,
-                            color: Color(0XFFFF0000),
-                          ),
+                            'DESCULBRA OS BENEFÍCIOS DA NOSSA \n INICIATIVA.',
+                            softWrap: false,
+                            textAlign: MediaQuery.of(context).size.width < 650
+                                ? TextAlign.center
+                                : TextAlign.left,
+                            style: GoogleFonts.montserrat(
+                              fontWeight: FontWeight.w400,
+                              fontSize: MediaQuery.of(context).size.width / 50.0,
+                              color: Color(0XFFFF0000),
+                            ),
                         ),
                       )
                     ],
@@ -155,15 +157,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(
                   alignment: MediaQuery.of(context).size.width < 650
-                      ? Alignment.centerLeft
+                      ? Alignment.center
                       : Alignment.center,
                   child: Image.asset(
                     'assets/frame1.png',
-                    width: 200.0,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ],
             ),
+            FormularioComponent(),
           ],
         ),
       ),
