@@ -1,7 +1,8 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zerowate/src/home/formulario/cadastro_mixin_validator.dart';
+import 'package:zerowate/src/home/home_page.dart';
 import 'package:zerowate/src/theme/theme_class.dart';
 
 class FormularioComponent extends StatefulWidget {
@@ -40,14 +41,6 @@ class _FormularioComponentState extends State<FormularioComponent>
       width: 2.0,
     ),
   );
-  final Email email = Email(
-    body: 'Email body',
-    subject: 'Email subject',
-    recipients: ['projectxz6969@gmail.com'],
-    cc: ['cc@example.com'],
-    bcc: ['bcc@example.com'],
-    isHTML: false,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +72,7 @@ class _FormularioComponentState extends State<FormularioComponent>
                         softWrap: true,
                         style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.w400,
-                          fontSize: MediaQuery.of(context).size.width / 20.0,
+                          fontSize: MediaQuery.of(context).size.width / 25.0,
                           color: ColorThemeClass.colorPrimary,
                         ),
                       ),
@@ -172,15 +165,34 @@ class _FormularioComponentState extends State<FormularioComponent>
                           ),
                           onPressed: () {
                             if (_keyForm.currentState!.validate()) {
-                              // Navigator.of(context).pushReplacement(
-                              //   MaterialPageRoute(
-                              //     builder: (_) => const MyHomePage(),
-                              //   ),
-                              // );
-                              FlutterEmailSender.send(email);
-
-                              //https://pub.dev/packages/flutter_email_sender/example
+                              _keyForm.currentState!.save();
+                              CoolAlert.show(
+                                context: context,
+                                width: MediaQuery.of(context).size.width / 3,
+                                type: CoolAlertType.success,
+                                title: 'Sucesso!',
+                                text: 
+                                  "Escola: ${controllerEscola.text}\n" +
+                                  "Nome: ${controllerNome.text}\n" +
+                                  "Email: ${controllerEmail.text}\n",
+                                loopAnimation: false,
+                                backgroundColor: ColorThemeClass.colorSecondary,
+                                cancelBtnText: '',
+                                borderRadius: 6.0,
+                                confirmBtnText: 'Confirmar',
+                                confirmBtnColor: ColorThemeClass.colorPrimary,
+                                showCancelBtn: false,
+                                onConfirmBtnTap: () {
+                                  _keyForm.currentState!.reset();
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (_) => const MyHomePage(),
+                                    ),
+                                  );
+                                },
+                              );
                             }
+                            ;
                           },
                           child: Text(
                             "Avançar",

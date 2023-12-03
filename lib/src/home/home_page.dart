@@ -1,9 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:zerowate/src/home/avaliacao_component/avaliacao_component.dart';
 import 'package:zerowate/src/home/drawerComponent/drawer_component.dart';
 import 'package:zerowate/src/home/formulario/formulario_component.dart';
 import 'package:zerowate/src/theme/theme_class.dart';
+import 'package:flutter_anchorlable/flutter_anchorlable.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -48,57 +50,70 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     ),
   ];
+  final anchorlableBodyController = AnchorlableController();
+  final introKey = GlobalObjectKey('introKey');
+  final worksKey = GlobalObjectKey('worksKey');
+  final contactKey = GlobalObjectKey('contactKey');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: const DrawerComponent(),
-      body: NestedScrollView(
-        floatHeaderSlivers: true,
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          SliverAppBar(
-            toolbarHeight: 80.0,
-            leadingWidth: 150.0,
-            foregroundColor: ColorThemeClass.colorPrimary,
-            surfaceTintColor: Colors.transparent,
-            leading: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-              child: Image.asset(
-                'assets/logo.png',
-                fit: BoxFit.contain,
-              ),
-            ),
-            actions: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                child: MediaQuery.of(context).size.width < 650
-                    ? Builder(builder: (context) {
-                        return IconButton(
-                          onPressed: () {
-                            Scaffold.of(context).openEndDrawer();
+      appBar: AppBar(
+        toolbarHeight: 80.0,
+        leadingWidth: 150.0,
+        foregroundColor: ColorThemeClass.colorPrimary,
+        surfaceTintColor: Colors.transparent,
+        leading: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+          child: Image.asset(
+            'assets/logo.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+            child: MediaQuery.of(context).size.width < 650
+                ? Builder(builder: (context) {
+                    return IconButton(
+                      onPressed: () {
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      icon: const Icon(Icons.menu),
+                    );
+                  })
+                : Row(
+                    children: [
+                      MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: InkWell(
+                          onTap: () async {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (_) => MyHomePage()),
+                            );
                           },
-                          icon: const Icon(Icons.menu),
-                        );
-                      })
-                    : Row(
-                        children: [
-                          ListSpace(textList: 'Home'),
-                          ListSpace(textList: 'Sobre nós'),
-                          ListSpace(textList: 'Como funciona'),
-                          ListSpace(textList: 'Custos'),
-                          ListSpace(textList: 'Escolas'),
-                        ],
+                          child: Text(
+                            'Home',
+                            style: GoogleFonts.montserrat(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                        ),
                       ),
-              ),
-            ],
+                      animateJumpButton('Sobre', worksKey),
+                      animateJumpButton('Avaliação', introKey),
+                      animateJumpButton('Contato', contactKey),
+                    ],
+                  ),
           ),
         ],
-        body: ListView(
+      ),
+      body: SingleChildScrollView(
+        controller: anchorlableBodyController,
+        child: Column(
           children: [
-            SizedBox(
-              height: 8.0,
-            ),
             SizedBox(
               width: double.infinity,
               child: CarouselSlider(
@@ -114,6 +129,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             GridView.count(
+              key: worksKey,
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
               crossAxisCount: Visu(),
               physics: NeverScrollableScrollPhysics(),
@@ -141,16 +157,18 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                            'DESCULBRA OS BENEFÍCIOS DA NOSSA \n INICIATIVA.',
-                            softWrap: false,
-                            textAlign: MediaQuery.of(context).size.width < 650
-                                ? TextAlign.center
-                                : TextAlign.left,
-                            style: GoogleFonts.montserrat(
-                              fontWeight: FontWeight.w400,
-                              fontSize: MediaQuery.of(context).size.width / 50.0,
-                              color: ColorThemeClass.colorPrimary,
-                            ),
+                          'DESCULBRA OS BENEFÍCIOS DA NOSSA \n INICIATIVA.',
+                          softWrap: false,
+                          textAlign: MediaQuery.of(context).size.width < 650
+                              ? TextAlign.center
+                              : TextAlign.left,
+                          style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w400,
+                            fontSize: MediaQuery.of(context).size.width < 650
+                                ? MediaQuery.of(context).size.width / 30.0
+                                : MediaQuery.of(context).size.width / 45.0,
+                            color: ColorThemeClass.colorPrimary,
+                          ),
                         ),
                       )
                     ],
@@ -167,32 +185,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            FormularioComponent(),
+            AvaliacaoComponent(
+              key: introKey,
+            ),
+            FormularioComponent(key: contactKey),
           ],
         ),
       ),
     );
   }
-}
 
-class ListSpace extends StatelessWidget {
-  final String textList;
-  const ListSpace({super.key, required this.textList});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 15.0),
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: Text(
-          textList,
-          style: GoogleFonts.montserrat(
-            fontWeight: FontWeight.w500,
-            fontSize: 15.0,
+  Widget animateJumpButton(final String textList, GlobalKey anchor) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: InkWell(
+            onTap: () async {
+              await anchorlableBodyController.animateToAnchor(anchor,
+                  duration: const Duration(seconds: 1), curve: Curves.easeIn);
+            },
+            child: Text(
+              textList,
+              style: GoogleFonts.montserrat(
+                fontWeight: FontWeight.w500,
+                fontSize: 15.0,
+              ),
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }
