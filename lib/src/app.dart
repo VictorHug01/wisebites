@@ -10,7 +10,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Wise Bites',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0XFFFF0000)),
+        scrollbarTheme: ScrollbarThemeData(thumbColor: MaterialStateProperty.all(Color(0xffe63946))),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xffe63946)),
         useMaterial3: true,
       ),
       home: const MyHomePage(),

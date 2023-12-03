@@ -50,8 +50,8 @@ class _FormularioComponentState extends State<FormularioComponent>
       children: [
         Container(
           width: MediaQuery.of(context).size.width < 650
-              ? MediaQuery.of(context).size.width / 1.5
-              : MediaQuery.of(context).size.width / 1.9,
+              ? MediaQuery.of(context).size.width / 1.2
+              : MediaQuery.of(context).size.width / 1.8,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Form(
@@ -64,27 +64,26 @@ class _FormularioComponentState extends State<FormularioComponent>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      const SizedBox(
-                        height: 90,
-                      ),
                       Text(
                         'COMECE AGORA!',
-                        softWrap: true,
                         style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.w400,
-                          fontSize: MediaQuery.of(context).size.width / 25.0,
+                          fontSize: MediaQuery.of(context).size.width < 650
+                          ? MediaQuery.of(context).size.width / 15.0
+                          : MediaQuery.of(context).size.width / 25.0,
                           color: ColorThemeClass.colorPrimary,
                         ),
                       ),
                       Text(
                         'PREENCHA ABAIXO PARA PARTICIPAR!',
-                        softWrap: false,
                         textAlign: MediaQuery.of(context).size.width < 650
                             ? TextAlign.center
                             : TextAlign.left,
                         style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.w400,
-                          fontSize: MediaQuery.of(context).size.width / 50.0,
+                          fontSize: MediaQuery.of(context).size.width < 650
+                          ? MediaQuery.of(context).size.width / 30.0
+                          : MediaQuery.of(context).size.width / 55.0,
                           color: ColorThemeClass.colorPrimary,
                         ),
                       ),
