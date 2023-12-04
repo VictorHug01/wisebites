@@ -50,8 +50,8 @@ class _FormularioComponentState extends State<FormularioComponent>
       children: [
         Container(
           width: MediaQuery.of(context).size.width < 650
-              ? MediaQuery.of(context).size.width / 1.2
-              : MediaQuery.of(context).size.width / 1.8,
+              ? MediaQuery.of(context).size.width / 1.1
+              : MediaQuery.of(context).size.width / 1.4,
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Form(
@@ -190,8 +190,7 @@ class _FormularioComponentState extends State<FormularioComponent>
                                   );
                                 },
                               );
-                            }
-                            ;
+                            };
                           },
                           child: Text(
                             "Avançar",

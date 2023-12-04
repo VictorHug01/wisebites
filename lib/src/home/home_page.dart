@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:zerowate/src/home/avaliacao_component/avaliacao_component.dart';
 import 'package:zerowate/src/home/formulario/formulario_component.dart';
 import 'package:zerowate/src/theme/theme_class.dart';
@@ -16,6 +17,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final anchorlableBodyController = AnchorlableController();
+  final homeKey = GlobalObjectKey('homeKey');
+  final introKey = GlobalObjectKey('introKey');
+  final worksKey = GlobalObjectKey('worksKey');
+  final contactKey = GlobalObjectKey('contactKey');
   int screenWidth = 0;
 
   Visu() {
@@ -27,33 +33,139 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   List<Widget> imagens = [
-    SizedBox(
+    Container(
       width: double.infinity,
-      child: Image.asset(
-        'assets/s1.png',
-        fit: BoxFit.cover,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage(
+              'assets/s1.png',
+            ),
+            fit: BoxFit.cover,
+            alignment: Alignment.center),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Builder(builder: (context) {
+            return Text(
+              'Um passo necessário rumo á\n sustentabilidade!',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.montserrat(
+                  color: ColorThemeClass.colorSecondary,
+                  fontSize: MediaQuery.of(context).size.width < 750 ? 30 : 40,
+                  fontWeight: FontWeight.bold),
+            );
+          }),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
+            child: ElevatedButton(
+              onPressed: () async {
+                launchUrl(Uri.parse(
+                    'https://www.figma.com/proto/5im7tLyEJkUUEJR8mf5CWF/WiseBites?type=design&node-id=2-25&t=byzTN2gBN0eX9jKF-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A25'));
+              },
+              child: Text(
+                'Quero saber mais!',
+                style: GoogleFonts.montserrat(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     ),
-    SizedBox(
+    Container(
       width: double.infinity,
-      child: Image.asset(
-        'assets/s2.png',
-        fit: BoxFit.cover,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage(
+              'assets/s2.png',
+            ),
+            fit: BoxFit.cover,
+            alignment: Alignment.center),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Builder(builder: (context) {
+            return Text(
+              'A iniciativa feita para sua\n ESCOLA',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.montserrat(
+                  color: ColorThemeClass.colorSecondary,
+                  fontSize: MediaQuery.of(context).size.width < 750 ? 30 : 40,
+                  fontWeight: FontWeight.bold),
+            );
+          }),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
+            child: ElevatedButton(
+              onPressed: () async {
+                launchUrl(Uri.parse(
+                    'https://www.figma.com/proto/5im7tLyEJkUUEJR8mf5CWF/WiseBites?type=design&node-id=2-25&t=byzTN2gBN0eX9jKF-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A25'));
+              },
+              child: Text(
+                'Quero saber mais!',
+                style: GoogleFonts.montserrat(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     ),
-    SizedBox(
+    Container(
       width: double.infinity,
-      child: Image.asset(
-        'assets/s3.png',
-        fit: BoxFit.cover,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage(
+              'assets/s3.png',
+            ),
+            fit: BoxFit.cover,
+            alignment: Alignment.center),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Builder(builder: (context) {
+            return Text(
+              'Ajude a conbater o \n disperdício de alimentos! \n entenda como nossa iniciativa ajuda escolas a \n diminuir o desperdicío.',
+              textAlign: TextAlign.center,
+              style: GoogleFonts.montserrat(
+                  color: ColorThemeClass.colorSecondary,
+                  fontSize: MediaQuery.of(context).size.width < 750 ? 30 : 40,
+                  fontWeight: FontWeight.bold),
+            );
+          }),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
+            child: ElevatedButton(
+              onPressed: () async {
+                launchUrl(Uri.parse(
+                    'https://www.figma.com/proto/5im7tLyEJkUUEJR8mf5CWF/WiseBites?type=design&node-id=2-25&t=byzTN2gBN0eX9jKF-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A25'));
+              },
+              child: Text(
+                'Quero saber mais!',
+                style: GoogleFonts.montserrat(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     ),
   ];
-  final anchorlableBodyController = AnchorlableController();
-  final homeKey = GlobalObjectKey('homeKey');
-  final introKey = GlobalObjectKey('introKey');
-  final worksKey = GlobalObjectKey('worksKey');
-  final contactKey = GlobalObjectKey('contactKey');
   Widget buildResponsiveLayout(List<Widget> children) {
     return MediaQuery.of(context).size.width > 650
         ? SizedBox(
@@ -122,23 +234,14 @@ class _MyHomePageState extends State<MyHomePage> {
         toolbarHeight: 80.0,
         leadingWidth: 150.0,
         foregroundColor: ColorThemeClass.colorPrimary,
-        surfaceTintColor: Colors.transparent,
+        surfaceTintColor: Color(0xffe63946),
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
-            child: InkWell(
-              splashColor: Colors.transparent,
-              hoverColor: Colors.transparent,
-              child: Image.asset(
-                'assets/logo.png',
-                fit: BoxFit.contain,
-              ),
-              onTap: () async {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => MyHomePage()),
-                );
-              },
+            child: Image.asset(
+              'assets/logo.png',
+              fit: BoxFit.contain,
             ),
           ),
         ),
@@ -177,7 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 options: CarouselOptions(
                   autoPlayCurve: Curves.easeInOutSine,
                   viewportFraction: 1.0,
-                  height: MediaQuery.of(context).size.height / 1,
+                  height: MediaQuery.of(context).size.height / 1.0,
                   autoPlay: true,
                   autoPlayInterval: const Duration(seconds: 3),
                 ),
@@ -201,7 +304,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           'Sobre nós',
                           softWrap: true,
                           style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w500,
                             fontSize: MediaQuery.of(context).size.width < 650
                                 ? MediaQuery.of(context).size.width / 15.0
                                 : MediaQuery.of(context).size.width / 25.0,
@@ -212,7 +315,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'DESCULBRA OS BENEFÍCIOS DA NOSSA \n INICIATIVA.',
+                          'DESCULBRA OS BENEFÍCIOS DA NOSSA\nINICIATIVA.',
                           softWrap: false,
                           textAlign: MediaQuery.of(context).size.width < 650
                               ? TextAlign.center
@@ -220,7 +323,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.w400,
                             fontSize: MediaQuery.of(context).size.width < 650
-                                ? MediaQuery.of(context).size.width / 30.0
+                                ? MediaQuery.of(context).size.width / 23.0
                                 : MediaQuery.of(context).size.width / 45.0,
                             color: ColorThemeClass.colorPrimary,
                           ),
@@ -232,10 +335,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 Container(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Image.asset(
-                      'assets/frame1.png',
-                      width:
-                          MediaQuery.of(context).size.width >= 750 ? 200 : 200,
+                    child: InkWell(
+                      onTap: () {
+                        launchUrl(Uri.parse(
+                            'https://www.figma.com/proto/5im7tLyEJkUUEJR8mf5CWF/WiseBites?type=design&node-id=18-129&t=byzTN2gBN0eX9jKF-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A25'));
+                      },
+                      child: Image.asset(
+                        'assets/frame1.png',
+                        width: MediaQuery.of(context).size.width >= 750
+                            ? 200
+                            : 200,
+                      ),
                     ),
                   ),
                 ),
@@ -293,7 +403,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               );
-            }
+            },
           ),
         ),
       );

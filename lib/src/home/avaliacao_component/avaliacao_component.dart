@@ -48,7 +48,7 @@ class _AvaliacaoComponentState extends State<AvaliacaoComponent> {
                   'O que os outros dizem?',
                   softWrap: true,
                   style: GoogleFonts.montserrat(
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w600,
                     fontSize: MediaQuery.of(context).size.width < 650
                         ? MediaQuery.of(context).size.width / 15.0
                         : MediaQuery.of(context).size.width / 25.0,
@@ -61,7 +61,7 @@ class _AvaliacaoComponentState extends State<AvaliacaoComponent> {
                   style: GoogleFonts.montserrat(
                     fontWeight: FontWeight.w400,
                     fontSize: MediaQuery.of(context).size.width < 650
-                        ? MediaQuery.of(context).size.width / 30.0
+                        ? MediaQuery.of(context).size.width / 23.0
                         : MediaQuery.of(context).size.width / 45.0,
                     color: ColorThemeClass.colorPrimary,
                   ),
@@ -117,9 +117,10 @@ class _CardAvaliacaoState extends State<CardAvaliacao> {
                     color: Color(0xffe63946),
                     borderRadius: BorderRadius.circular(6.0)),
                 alignment: Alignment.center,
-                height: MediaQuery.of(context).size.width >= 650 &&  MediaQuery.of(context).size.width <= 1200
-                ? 200
-                :300,
+                height: MediaQuery.of(context).size.width >= 650 &&
+                        MediaQuery.of(context).size.width <= 1200
+                    ? 200
+                    : 300,
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
@@ -133,9 +134,12 @@ class _CardAvaliacaoState extends State<CardAvaliacao> {
                         title: Text(
                           widget.textTitle,
                           style: GoogleFonts.montserrat(
-                              color: ColorThemeClass.colorSecondary,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w700),
+                            color: ColorThemeClass.colorSecondary,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         ),
                         titleAlignment: ListTileTitleAlignment.center,
                         trailing: Builder(
@@ -168,8 +172,10 @@ class _CardAvaliacaoState extends State<CardAvaliacao> {
                         style: GoogleFonts.montserrat(
                           color: ColorThemeClass.colorSecondary,
                           fontSize:
-                              MediaQuery.of(context).size.width < 650 ? 11 : 13,
+                              MediaQuery.of(context).size.width < 650 ? 13 : 13,
                         ),
+                        maxLines: 4,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
