@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,9 +9,7 @@ import 'package:zerowate/src/theme/theme_class.dart';
 import 'package:flutter_anchorlable/flutter_anchorlable.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({
-    super.key,
-  });
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -24,148 +23,88 @@ class _MyHomePageState extends State<MyHomePage> {
   final contactKey = GlobalObjectKey('contactKey');
   int screenWidth = 0;
 
-  Visu() {
-    if (MediaQuery.of(context).size.width < 650) {
-      return screenWidth = 1;
-    } else {
-      return screenWidth = 2;
-    }
+  void Visu() {
+    screenWidth = MediaQuery.of(context).size.width < 650 ? 1 : 2;
   }
 
   List<Widget> imagens = [
-    Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(
-              'assets/s1.png',
-            ),
-            fit: BoxFit.cover,
-            alignment: Alignment.center),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Builder(builder: (context) {
-            return Text(
-              'Um passo necessário rumo á\n sustentabilidade!',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.montserrat(
-                  color: ColorThemeClass.colorSecondary,
-                  fontSize: MediaQuery.of(context).size.width < 750 ? 30 : 40,
-                  fontWeight: FontWeight.bold),
-            );
-          }),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
-            child: ElevatedButton(
-              onPressed: () async {
-                launchUrl(Uri.parse(
-                    'https://www.figma.com/proto/5im7tLyEJkUUEJR8mf5CWF/WiseBites?type=design&node-id=2-25&t=byzTN2gBN0eX9jKF-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A25'));
-              },
-              child: Text(
-                'Quero saber mais!',
-                style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-    Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(
-              'assets/s2.png',
-            ),
-            fit: BoxFit.cover,
-            alignment: Alignment.center),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Builder(builder: (context) {
-            return Text(
-              'A iniciativa feita para sua\n ESCOLA',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.montserrat(
-                  color: ColorThemeClass.colorSecondary,
-                  fontSize: MediaQuery.of(context).size.width < 750 ? 30 : 40,
-                  fontWeight: FontWeight.bold),
-            );
-          }),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
-            child: ElevatedButton(
-              onPressed: () async {
-                launchUrl(Uri.parse(
-                    'https://www.figma.com/proto/5im7tLyEJkUUEJR8mf5CWF/WiseBites?type=design&node-id=2-25&t=byzTN2gBN0eX9jKF-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A25'));
-              },
-              child: Text(
-                'Quero saber mais!',
-                style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-    Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage(
-              'assets/s3.png',
-            ),
-            fit: BoxFit.cover,
-            alignment: Alignment.center),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Builder(builder: (context) {
-            return Text(
-              'Ajude a conbater o \n disperdício de alimentos! \n entenda como nossa iniciativa ajuda escolas a \n diminuir o desperdicío.',
-              textAlign: TextAlign.center,
-              style: GoogleFonts.montserrat(
-                  color: ColorThemeClass.colorSecondary,
-                  fontSize: MediaQuery.of(context).size.width < 750 ? 30 : 40,
-                  fontWeight: FontWeight.bold),
-            );
-          }),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
-            child: ElevatedButton(
-              onPressed: () async {
-                launchUrl(Uri.parse(
-                    'https://www.figma.com/proto/5im7tLyEJkUUEJR8mf5CWF/WiseBites?type=design&node-id=2-25&t=byzTN2gBN0eX9jKF-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A25'));
-              },
-              child: Text(
-                'Quero saber mais!',
-                style: GoogleFonts.montserrat(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
+    _buildImageContainer(
+        'assets/s1.png', 'Um passo necessário rumo à sustentabilidade!'),
+    _buildImageContainer('assets/s2.png', 'A iniciativa feita para sua ESCOLA'),
+    _buildImageContainer('assets/s3.png',
+        'Ajude a combater o desperdício de alimentos! Entenda como nossa iniciativa ajuda escolas a diminuir o desperdício.'),
   ];
+
+  static Widget _buildImageContainer(String assetPath, String text) {
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(assetPath),
+          fit: BoxFit.cover,
+          alignment: Alignment.center,
+        ),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Builder(
+            builder: (context) => Text(
+              text,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.montserrat(
+                color: ColorThemeClass.colorSecondary,
+                fontSize: MediaQuery.of(context).size.width < 750 ? 30 : 40,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 15.0),
+            child: Builder(
+              builder: (context) => ElevatedButton(
+                onPressed: () async {
+                  CoolAlert.show(
+                    context: context,
+                    width: MediaQuery.of(context).size.width / 3,
+                    type: CoolAlertType.warning,
+                    title: 'Atenção!',
+                    text: 'Você será direcionado para o protótipo de teste.',
+                    loopAnimation: false,
+                    backgroundColor: ColorThemeClass.colorSecondary,
+                    cancelBtnText: 'Cancelar',
+                    borderRadius: 6.0,
+                    confirmBtnText: 'Confirmar',
+                    confirmBtnColor: ColorThemeClass.colorPrimary,
+                    showCancelBtn: true,
+                    closeOnConfirmBtnTap: true,
+                    autoCloseDuration: Duration(seconds: 15),
+                    onConfirmBtnTap: () {
+                      launchUrl(
+                        Uri.parse(
+                          'https://www.figma.com/proto/5im7tLyEJkUUEJR8mf5CWF/WiseBites?type=design&node-id=2-25&t=byzTN2gBN0eX9jKF-0&scaling=scale-down&page-id=0%3A1&starting-point-node-id=2%3A25',
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Text(
+                  'Quero saber mais!',
+                  style: GoogleFonts.montserrat(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget buildResponsiveLayout(List<Widget> children) {
     return MediaQuery.of(context).size.width > 650
         ? SizedBox(
